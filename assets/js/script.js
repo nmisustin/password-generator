@@ -14,29 +14,45 @@ function selector(){
   return selection;
 }
 //Start of generator code
-function generatePassword(){
+var length = ""
   //password length prompt
-  var passwordLength = function(){
-    var length = "";
+  function passwordLength(){
     while (length ==="" || length === "null"){
-      prompt("Please choose a password length between 8 and 128 characters.");
+      length = window.prompt("Please choose a password length between 8 and 128 characters.");
       if (length < 8 || length > 128){
         passwordLength();
       }
-      else{
-        return length
-      }
     }
   }
-  console.log(passwordLength())
-
+  passwordLength();
+console.log(length)
   //Number letter and symbol prompts that add options to possible array.
-
+  //concat() var charSelection= char selection.concat(uppercase, lowercase, number, symbol)
+  function createArray(){
+    var addUpper = window.confirm("Do you want uppercase letters?");
+    if (addUpper){
+      charSelection = charSelection.concat(uppercase);
+    };
+    var addLower = window.confirm("Do you want lowercase letters?");
+    if (addLower){
+      charSelection= charSelection.concat(lowercase);
+    };
+    var addNumber = window.confirm("Do you want numbers?");
+    if(addNumber){
+      charSelection= charSelection.concat(number);
+    };
+    var addSymbol = window.confirm("Do you want symbols?");
+    if(addSymbol) {
+      charSelection = charSelection.concat(symbol)
+    }
+    console.log(charSelection)
+  }
+  createArray()
   //use random number generator to select components
 
   //cylcle through until one of each of the asked for symbols is selected.
 
-}
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
