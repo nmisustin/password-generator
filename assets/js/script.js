@@ -16,7 +16,20 @@ function selector(){
 //Start of generator code
 function generatePassword(){
   //password length prompt
-  
+  var passwordLength = function(){
+    var length = "";
+    while (length ==="" || length === "null"){
+      prompt("Please choose a password length between 8 and 128 characters.");
+      if (length < 8 || length > 128){
+        passwordLength();
+      }
+      else{
+        return length
+      }
+    }
+  }
+  console.log(passwordLength())
+
   //Number letter and symbol prompts that add options to possible array.
 
   //use random number generator to select components
