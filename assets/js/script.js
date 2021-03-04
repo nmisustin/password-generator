@@ -7,7 +7,7 @@ var symbol =["`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_
 
 //Empty array to store all of the selected elements for the password
 var charSelection = [];
-
+var charChosen = [];
 //random number generator to select the elements I need
 function selector(){
   var selection= Math.floor(Math.random()*charSelection.length);
@@ -17,14 +17,17 @@ function selector(){
 var length = ""
   //password length prompt
   function passwordLength(){
-    while (length ==="" || length === "null"){
+    while (true) {
       length = window.prompt("Please choose a password length between 8 and 128 characters.");
-      if (length < 8 || length > 128){
-        passwordLength();
+      if (length !== "" && length !== null && length >= 8 && length <= 128) {
+        break;
+      }
+      else{
+        window.alert("That is not a valid response.");
       }
     }
   }
-  passwordLength();
+passwordLength();
 console.log(length)
   //Number letter and symbol prompts that add options to possible array.
   //concat() var charSelection= char selection.concat(uppercase, lowercase, number, symbol)
@@ -49,7 +52,13 @@ console.log(length)
   }
   createArray()
   //use random number generator to select components
-
+  function selectComponents(){
+    for ( var i = 0; i < length; i++) {
+      charChosen = charChosen.concat(charSelection[selector()]);
+    }
+  }
+  selectComponents();
+  console.log(charChosen.join(''));
   //cylcle through until one of each of the asked for symbols is selected.
 
 
