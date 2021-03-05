@@ -31,35 +31,64 @@ passwordLength();
 console.log(length)
   //Number letter and symbol prompts that add options to possible array.
   //concat() var charSelection= char selection.concat(uppercase, lowercase, number, symbol)
-  function createArray(){
-    var addUpper = window.confirm("Do you want uppercase letters?");
-    if (addUpper){
-      charSelection = charSelection.concat(uppercase);
-    };
-    var addLower = window.confirm("Do you want lowercase letters?");
-    if (addLower){
-      charSelection= charSelection.concat(lowercase);
-    };
-    var addNumber = window.confirm("Do you want numbers?");
-    if(addNumber){
-      charSelection= charSelection.concat(number);
-    };
-    var addSymbol = window.confirm("Do you want symbols?");
-    if(addSymbol) {
-      charSelection = charSelection.concat(symbol)
-    }
-    console.log(charSelection)
+var addUpper = window.confirm("Do you want uppercase letters?");
+var addLower = window.confirm("Do you want lowercase letters?");
+var addNumber = window.confirm("Do you want numbers?");
+var addSymbol = window.confirm("Do you want symbols?");
+function createArray(){
+  if (addUpper){
+    charSelection = charSelection.concat(uppercase);
+  };
+  if (addLower){
+    charSelection= charSelection.concat(lowercase);
+  };
+  if(addNumber){
+    charSelection= charSelection.concat(number);
+  };
+  if(addSymbol) {
+    charSelection = charSelection.concat(symbol)
   }
-  createArray()
+  console.log(charSelection)
+}
+createArray()
   //use random number generator to select components
-  function selectComponents(){
-    for ( var i = 0; i < length; i++) {
-      charChosen = charChosen.concat(charSelection[selector()]);
+
+function selectComponents(){
+  charChosen = [];
+  for ( var i = 0; i < length; i++) {
+    charChosen = charChosen.concat(charSelection[selector()]);
+  }
+}  
+  //cylcle through until one of each of the asked for symbols is selected.
+  // come up with a way to loop through each of the selected arrays to compare to charChosen (includes function?)
+function checkCharacters (password, characterSet){
+  for (var i = 0; i < characterSet.length; i++){
+    if (password.includes(characterSet[i])){
+      return true;
     }
   }
+  return false;
+}
+function checkAll() {
+  if (addUpper && !checkCharacters(charChosen, uppercase)){
+    return false;
+  }
+  if (addLower && !checkCharacters(charChosen, lowercase)){
+    return false;
+  }
+  if (addNumber && !checkCharacters(charChosen, number)){
+    return false;
+  }
+  if (addSymbol && !checkCharacters(charChosen, symbol)){
+    return false;
+  }
+  return true;
+}
+do {
   selectComponents();
   console.log(charChosen.join(''));
-  //cylcle through until one of each of the asked for symbols is selected.
+} while (!checkAll());
+
 
 
 
